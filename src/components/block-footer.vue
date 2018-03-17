@@ -1,40 +1,60 @@
 <template>
-  <!-- This footer should be hidden by default and shown when there are todos -->
-  <footer class="footer">
-    <!-- This should be `0 items left` by default -->
+  <footer
+    class="footer"
+    v-if="totalItemsNumber > 0"
+  >
     <span class="todo-count">
-      <strong>0</strong> item left
+      <strong>{{ totalItemsNumber - completedItemIds.length }}</strong> item left
     </span>
-    <!-- Remove this if you don't implement routing -->
-    <ul class="filters">
-      <li>
-        <a
-          class="selected"
-          href="#/"
-        >
-          All
-        </a>
-      </li>
-      <li>
-        <a href="#/active">
-          Active
-        </a>
-      </li>
-      <li>
-        <a href="#/completed">
-          Completed
-        </a>
-      </li>
-    </ul>
-    <!-- Hidden if no completed items are left ↓ -->
-    <button class="clear-completed">
+    <button
+      class="clear-completed"
+      v-if="completedItemIds.length > 0"
+      @click="clearCompleted"
+    >
       Clear completed
     </button>
   </footer>
 </template>
 
 <script>
-export default {
+import { mapActions, mapGetters, mapMutations } from "vuex";
 
-}
+import Focus from "../directives/focus";
+import { ACTIONS, GETTERS, MUTATIONS } from "../store/module-todos";
+
+export default {
+  computed: {
+    ...mapGetters("todos", {
+      todos: GETTERS.TODOS
+    }),
+
+    completedItemIds() {
+      return Object.entries(this.todos)
+        .filter(([, value]) => value.checked)
+        .map(([id]) => id);
+    },
+
+    totalItemsNumber() {
+      return Object.keys(this.todos).length;
+    }
+  },
+
+  methods: {
+    ...mapActions("todos", {
+      load: ACTIONS.LOAD
+    }),
+
+    ...mapMutations("todos", {
+      remove: MUTATIONS.REMOVE
+    }),
+
+    clearCompleted() {
+      this.completedItemIds.forEach(id => this.remove(id));
+    }
+  },
+
+  mounted() {
+    this.load();
+  }
+};
 </script>
