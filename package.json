@@ -10,7 +10,10 @@
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
   },
   "dependencies": {
-    "vue": "^2.5.11"
+    "todomvc-app-css": "^2.1.0",
+    "todomvc-common": "^1.0.4",
+    "vue": "^2.5.11",
+    "vuex": "^3.0.1"
   },
   "browserslist": [
     "> 1%",
