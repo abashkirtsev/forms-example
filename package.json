@@ -1,6 +1,5 @@
 {
   "name": "forms-example",
-  "description": "Example of working with forms for vue.js Moscow meetup. Based on todomvc-template (https://github.com/tastejs/todomvc-app-template).",
   "version": "1.0.0",
   "author": "Alexander Bashkirtsev <alexander.bashkirtsev@acronis.com>",
   "license": "MIT",
