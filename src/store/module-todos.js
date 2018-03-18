@@ -7,7 +7,6 @@ import { getTodos, putTodos } from "../api/todos";
  */
 export const GETTERS = {
   IS_CHANGED: "IS_CHANGED",
-  IS_LOADED: "IS_LOADED",
   TODOS: "TODOS"
 };
 export const MUTATIONS = {
@@ -43,10 +42,6 @@ export default {
   getters: {
     [GETTERS.IS_CHANGED](state) {
       return Object.keys(state.changes).length > 0;
-    },
-
-    [GETTERS.IS_LOADED](state) {
-      return state.origin !== null;
     },
 
     [GETTERS.TODOS](state) {
@@ -137,7 +132,7 @@ export default {
 
   actions: {
     async [ACTIONS.LOAD]({ state, getters, commit }) {
-      if (state.isLoading || getters[GETTERS.IS_LOADED]) {
+      if (state.isLoading || state.origin !== null) {
         return;
       }
 
