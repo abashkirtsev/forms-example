@@ -1,14 +1,25 @@
 <template>
-  <footer
-    class="footer"
-    v-if="totalItemsNumber > 0"
-  >
+  <footer class="footer">
     <span class="todo-count">
       <strong>{{ totalItemsNumber - completedItemIds.length }}</strong> item left
     </span>
     <button
-      class="clear-completed"
-      v-if="completedItemIds.length > 0"
+      class="action reset"
+      :disabled="!isChanged"
+      @click="reset"
+    >
+      Reset
+    </button>
+    <button
+      class="action save"
+      :disabled="!isChanged"
+      @click="save"
+    >
+      Save
+    </button>
+    <button
+      class="action clear-completed"
+      :disabled="completedItemIds.length === 0"
       @click="clearCompleted"
     >
       Clear completed
@@ -25,7 +36,8 @@ import { ACTIONS, GETTERS, MUTATIONS } from "../store/module-todos";
 export default {
   computed: {
     ...mapGetters("todos", {
-      todos: GETTERS.TODOS
+      todos: GETTERS.TODOS,
+      isChanged: GETTERS.IS_CHANGED
     }),
 
     completedItemIds() {
@@ -41,11 +53,13 @@ export default {
 
   methods: {
     ...mapActions("todos", {
-      load: ACTIONS.LOAD
+      load: ACTIONS.LOAD,
+      save: ACTIONS.SAVE
     }),
 
     ...mapMutations("todos", {
-      remove: MUTATIONS.REMOVE
+      remove: MUTATIONS.REMOVE,
+      reset: MUTATIONS.RESET_CHANGES
     }),
 
     clearCompleted() {
@@ -58,3 +72,28 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.save,
+.reset {
+  position: relative;
+  margin: 0 1rem;
+  cursor: pointer;
+}
+
+.save:hover {
+  text-decoration: underline;
+  color: #5dc2af;
+}
+
+.reset:hover {
+  text-decoration: underline;
+  color: #af5b5e;
+}
+
+.action[disabled] {
+  cursor: default;
+  text-decoration: none;
+  color: #d9d9d9;
+}
+</style>
