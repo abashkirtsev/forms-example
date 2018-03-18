@@ -12,6 +12,10 @@ export async function getTodos() {
     },
     2: {
       text: "Add resetting and saving",
+      checked: true
+    },
+    3: {
+      text: "Present result",
       checked: false
     }
   };
