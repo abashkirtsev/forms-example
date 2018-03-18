@@ -56,8 +56,8 @@
 <script>
 import { mapActions, mapGetters, mapMutations } from "vuex";
 
-import Focus from "../directives/focus";
-import { ACTIONS, GETTERS, MUTATIONS } from "../store/module-todos";
+import Focus from "../../directives/focus";
+import { ACTIONS, GETTERS, MUTATIONS } from "../../store/module-todos";
 
 export default {
   directives: { Focus },

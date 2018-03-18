@@ -11,8 +11,7 @@
 <script>
 import { mapActions, mapMutations } from "vuex";
 
-import Focus from "../directives/focus";
-import { ACTIONS, MUTATIONS } from "../store/module-todos";
+import { ACTIONS, MUTATIONS } from "../../store/module-todos";
 
 export default {
   data() {

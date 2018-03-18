@@ -5,11 +5,11 @@
 
       <header class="header">
         <h1>todos</h1>
-        <BlockNew />
+        <TodoNew />
       </header>
 
-      <BlockList />
-      <BlockFooter />
+      <TodoList />
+      <TodoFooter />
     </section>
 
     <footer class="info">
@@ -21,13 +21,13 @@
 <script>
 import { mapState } from "vuex";
 
-import BlockFooter from "./components/block-footer";
-import BlockList from "./components/block-list";
-import BlockNew from "./components/block-new";
-import VLoader from "./components/controls/loader";
+import TodoFooter from "./blocks/todo-footer";
+import TodoList from "./blocks/todo-list";
+import TodoNew from "./blocks/todo-new";
+import VLoader from "./controls/loader";
 
 export default {
-  components: { BlockFooter, BlockList, BlockNew, VLoader },
+  components: { TodoFooter, TodoList, TodoNew, VLoader },
 
   computed: mapState("todos", ["isLoading", "isSaving"])
 };
